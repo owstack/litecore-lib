@@ -15,14 +15,9 @@ bower_components
 report
 .DS_Store
 
-
-bitcore.js
-bitcore.min.js
-bitcore.js.sig
-bitcore.min.js.sig
 tests.js
 
-litecore-lib.js
-litecore-lib.min.js
-litecore-lib.js.sig
-litecore-lib.min.js.sig
+ltc-lib.js
+ltc-lib.min.js
+ltc-lib.js.sig
+ltc-lib.min.js.sig

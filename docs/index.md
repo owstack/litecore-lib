@@ -1,4 +1,4 @@
-# Bitcore v0.15.0
+# ltc-lib v0.0.1
 
 ## Principles
 
