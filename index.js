@@ -1,71 +1,61 @@
 'use strict';
 
-var litecore = module.exports;
+var ltcLib = module.exports;
 
 // module information
-litecore.version = 'v' + require('./package.json').version;
-litecore.versionGuard = function(version) {
-  if (version !== undefined) {
-    var message = 'More than one instance of litecore-lib found. ' +
-      'Please make sure to require litecore-lib and check that submodules do' +
-      ' not also include their own litecore-lib dependency.';
-    throw new Error(message);
-  }
-};
-litecore.versionGuard(global._litecore);
-global._litecore = litecore.version;
+ltcLib.version = 'v' + require('./package.json').version;
 
 // crypto
-litecore.crypto = {};
-litecore.crypto.BN = require('./lib/crypto/bn');
-litecore.crypto.ECDSA = require('./lib/crypto/ecdsa');
-litecore.crypto.Hash = require('./lib/crypto/hash');
-litecore.crypto.Random = require('./lib/crypto/random');
-litecore.crypto.Point = require('./lib/crypto/point');
-litecore.crypto.Signature = require('./lib/crypto/signature');
+ltcLib.crypto = {};
+ltcLib.crypto.BN = require('./lib/crypto/bn');
+ltcLib.crypto.ECDSA = require('./lib/crypto/ecdsa');
+ltcLib.crypto.Hash = require('./lib/crypto/hash');
+ltcLib.crypto.Random = require('./lib/crypto/random');
+ltcLib.crypto.Point = require('./lib/crypto/point');
+ltcLib.crypto.Signature = require('./lib/crypto/signature');
 
 // encoding
-litecore.encoding = {};
-litecore.encoding.Base58 = require('./lib/encoding/base58');
-litecore.encoding.Base58Check = require('./lib/encoding/base58check');
-litecore.encoding.BufferReader = require('./lib/encoding/bufferreader');
-litecore.encoding.BufferWriter = require('./lib/encoding/bufferwriter');
-litecore.encoding.Varint = require('./lib/encoding/varint');
+ltcLib.encoding = {};
+ltcLib.encoding.Base58 = require('./lib/encoding/base58');
+ltcLib.encoding.Base58Check = require('./lib/encoding/base58check');
+ltcLib.encoding.BufferReader = require('./lib/encoding/bufferreader');
+ltcLib.encoding.BufferWriter = require('./lib/encoding/bufferwriter');
+ltcLib.encoding.Varint = require('./lib/encoding/varint');
 
 // utilities
-litecore.util = {};
-litecore.util.buffer = require('./lib/util/buffer');
-litecore.util.js = require('./lib/util/js');
-litecore.util.preconditions = require('./lib/util/preconditions');
+ltcLib.util = {};
+ltcLib.util.buffer = require('./lib/util/buffer');
+ltcLib.util.js = require('./lib/util/js');
+ltcLib.util.preconditions = require('./lib/util/preconditions');
 
 // errors thrown by the library
-litecore.errors = require('./lib/errors');
+ltcLib.errors = require('./lib/errors');
 
 // main bitcoin library
-litecore.Address = require('./lib/address');
-litecore.Block = require('./lib/block');
-litecore.MerkleBlock = require('./lib/block/merkleblock');
-litecore.BlockHeader = require('./lib/block/blockheader');
-litecore.HDPrivateKey = require('./lib/hdprivatekey.js');
-litecore.HDPublicKey = require('./lib/hdpublickey.js');
-litecore.Networks = require('./lib/networks');
-litecore.Opcode = require('./lib/opcode');
-litecore.PrivateKey = require('./lib/privatekey');
-litecore.PublicKey = require('./lib/publickey');
-litecore.Script = require('./lib/script');
-litecore.Transaction = require('./lib/transaction');
-litecore.URI = require('./lib/uri');
-litecore.Unit = require('./lib/unit');
+ltcLib.Address = require('./lib/address');
+ltcLib.Block = require('./lib/block');
+ltcLib.MerkleBlock = require('./lib/block/merkleblock');
+ltcLib.BlockHeader = require('./lib/block/blockheader');
+ltcLib.HDPrivateKey = require('./lib/hdprivatekey.js');
+ltcLib.HDPublicKey = require('./lib/hdpublickey.js');
+ltcLib.Networks = require('./lib/networks');
+ltcLib.Opcode = require('./lib/opcode');
+ltcLib.PrivateKey = require('./lib/privatekey');
+ltcLib.PublicKey = require('./lib/publickey');
+ltcLib.Script = require('./lib/script');
+ltcLib.Transaction = require('./lib/transaction');
+ltcLib.URI = require('./lib/uri');
+ltcLib.Unit = require('./lib/unit');
 
 // dependencies, subject to change
-litecore.deps = {};
-litecore.deps.bnjs = require('bn.js');
-litecore.deps.bs58 = require('bs58');
-litecore.deps.Buffer = Buffer;
-litecore.deps.elliptic = require('elliptic');
-litecore.deps.scryptsy = require('scryptsy');
-litecore.deps._ = require('lodash');
+ltcLib.deps = {};
+ltcLib.deps.bnjs = require('bn.js');
+ltcLib.deps.bs58 = require('bs58');
+ltcLib.deps.Buffer = Buffer;
+ltcLib.deps.elliptic = require('elliptic');
+ltcLib.deps.scryptsy = require('scryptsy');
+ltcLib.deps._ = require('lodash');
 
 // Internal usage, exposed for testing/advanced tweaking
 
-litecore.Transaction.sighash = require('./lib/transaction/sighash');
+ltcLib.Transaction.sighash = require('./lib/transaction/sighash');
