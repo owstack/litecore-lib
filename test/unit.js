@@ -31,13 +31,13 @@ describe('Unit', function() {
     }).to.not.throw();
   });
 
-  it('has property accesors "LTC", "mLTC", "uLTC", "bits", and "satoshis"', function() {
+  it('has property accesors "LTC", "mLTC", "uLTC", "photons", and "litoshis"', function() {
     var unit = new Unit(1.2, 'LTC');
     unit.LTC.should.equal(1.2);
     unit.mLTC.should.equal(1200);
     unit.uLTC.should.equal(1200000);
-    unit.bits.should.equal(1200000);
-    unit.satoshis.should.equal(120000000);
+    unit.photons.should.equal(1200000);
+    unit.litoshis.should.equal(120000000);
   });
 
   it('a string amount is allowed', function() {
@@ -53,10 +53,10 @@ describe('Unit', function() {
     unit.mLTC.should.equal(1.00001);
 
     unit = Unit.fromBits('100');
-    unit.bits.should.equal(100);
+    unit.photons.should.equal(100);
 
     unit = Unit.fromSatoshis('8999');
-    unit.satoshis.should.equal(8999);
+    unit.litoshis.should.equal(8999);
 
     unit = Unit.fromFiat('43', 350);
     unit.LTC.should.equal(0.12285714);
@@ -72,45 +72,45 @@ describe('Unit', function() {
     unit.mLTC.should.equal(1.00001);
 
     unit = Unit.fromBits(100);
-    unit.bits.should.equal(100);
+    unit.photons.should.equal(100);
 
     unit = Unit.fromSatoshis(8999);
-    unit.satoshis.should.equal(8999);
+    unit.litoshis.should.equal(8999);
 
     unit = Unit.fromFiat(43, 350);
     unit.LTC.should.equal(0.12285714);
   });
 
-  it('converts to satoshis correctly', function() {
+  it('converts to litoshis correctly', function() {
     /* jshint maxstatements: 25 */
     var unit;
 
     unit = Unit.fromLTC(1.3);
     unit.mLTC.should.equal(1300);
-    unit.bits.should.equal(1300000);
-    unit.satoshis.should.equal(130000000);
+    unit.photons.should.equal(1300000);
+    unit.litoshis.should.equal(130000000);
 
     unit = Unit.fromMilis(1.3);
     unit.LTC.should.equal(0.0013);
-    unit.bits.should.equal(1300);
-    unit.satoshis.should.equal(130000);
+    unit.photons.should.equal(1300);
+    unit.litoshis.should.equal(130000);
 
     unit = Unit.fromBits(1.3);
     unit.LTC.should.equal(0.0000013);
     unit.mLTC.should.equal(0.0013);
-    unit.satoshis.should.equal(130);
+    unit.litoshis.should.equal(130);
 
     unit = Unit.fromSatoshis(3);
     unit.LTC.should.equal(0.00000003);
     unit.mLTC.should.equal(0.00003);
-    unit.bits.should.equal(0.03);
+    unit.photons.should.equal(0.03);
   });
 
   it('takes into account floating point problems', function() {
     var unit = Unit.fromLTC(0.00000003);
     unit.mLTC.should.equal(0.00003);
-    unit.bits.should.equal(0.03);
-    unit.satoshis.should.equal(3);
+    unit.photons.should.equal(0.03);
+    unit.litoshis.should.equal(3);
   });
 
   it('exposes unit codes', function() {
@@ -120,19 +120,19 @@ describe('Unit', function() {
     should.exist(Unit.mLTC);
     Unit.mLTC.should.equal('mLTC');
 
-    should.exist(Unit.bits);
-    Unit.bits.should.equal('bits');
+    should.exist(Unit.photons);
+    Unit.photons.should.equal('photons');
 
-    should.exist(Unit.satoshis);
-    Unit.satoshis.should.equal('satoshis');
+    should.exist(Unit.litoshis);
+    Unit.litoshis.should.equal('litoshis');
   });
 
   it('exposes a method that converts to different units', function() {
     var unit = new Unit(1.3, 'LTC');
     unit.to(Unit.LTC).should.equal(unit.LTC);
     unit.to(Unit.mLTC).should.equal(unit.mLTC);
-    unit.to(Unit.bits).should.equal(unit.bits);
-    unit.to(Unit.satoshis).should.equal(unit.satoshis);
+    unit.to(Unit.photons).should.equal(unit.photons);
+    unit.to(Unit.litoshis).should.equal(unit.litoshis);
   });
 
   it('exposes shorthand conversion methods', function() {
@@ -140,8 +140,8 @@ describe('Unit', function() {
     unit.toLTC().should.equal(unit.LTC);
     unit.toMilis().should.equal(unit.mLTC);
     unit.toMillis().should.equal(unit.mLTC);
-    unit.toBits().should.equal(unit.bits);
-    unit.toSatoshis().should.equal(unit.satoshis);
+    unit.toBits().should.equal(unit.photons);
+    unit.toLitoshis().should.equal(unit.litoshis);
   });
 
   it('can convert to fiat', function() {
@@ -173,7 +173,7 @@ describe('Unit', function() {
 
   it('inspect method displays nicely', function() {
     var unit = new Unit(1.3, 'LTC');
-    unit.inspect().should.equal('<Unit: 130000000 satoshis>');
+    unit.inspect().should.equal('<Unit: 130000000 litoshis>');
   });
 
   it('fails when the unit is not recognized', function() {

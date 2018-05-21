@@ -8,7 +8,7 @@ To understand the need of using the `Unit` class when dealing with unit conversi
 8198999.999999999
 > var litecore = require('litecore');
 > var Unit = litecore.Unit;
-> Unit.fromMilis(81.99).toSatoshis() // correct
+> Unit.fromMilis(81.99).toLitoshis() // correct
 8199000
 ```
 
@@ -42,7 +42,7 @@ unit = Unit.fromSatoshis(amount);
 ```
 
 ## Conversion
-Once you have a unit instance, you can check its representation in all the available units. For your convenience the classes expose three ways to accomplish this. Using the `.to(unitCode)` method, using a fixed unit like `.toSatoshis()` or by using the accessors.
+Once you have a unit instance, you can check its representation in all the available units. For your convenience the classes expose three ways to accomplish this. Using the `.to(unitCode)` method, using a fixed unit like `.toLitoshis()` or by using the accessors.
 
 ```javascript
 var unit;
@@ -55,7 +55,7 @@ value = Unit.fromSatoshis(amount).to(unitPreference);
 value = Unit.fromLTC(amount).toLTC();
 value = Unit.fromLTC(amount).toMilis();
 value = Unit.fromLTC(amount).toBits();
-value = Unit.fromLTC(amount).toSatoshis();
+value = Unit.fromLTC(amount).toLitoshis();
 
 // using accessors
 value = Unit.fromLTC(amount).LTC;

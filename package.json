@@ -1,6 +1,6 @@
 {
   "name": "@owstack/ltc-lib",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "A pure and powerful JavaScript Bitcoin library.",
   "main": "index.js",
   "scripts": {
@@ -34,6 +34,7 @@
     "request": "browser-request"
   },
   "dependencies": {
+    "@owstack/ows-common": "^0.0.5",
     "bn.js": "=4.11.8",
     "bs58": "=4.0.1",
     "buffer-compare": "=1.1.1",
