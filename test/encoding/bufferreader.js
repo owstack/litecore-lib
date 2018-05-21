@@ -190,11 +190,11 @@ describe('BufferReader', function() {
       br.readUInt64LEBN().toNumber().should.equal(1);
     });
 
-    it('should return 10BTC', function() {
-      var tenbtc = 10 * 1e8;
-      var tenbtcBuffer = new Buffer('00ca9a3b00000000', 'hex');
-      var br = new BufferReader(tenbtcBuffer);
-      br.readUInt64LEBN().toNumber().should.equal(tenbtc);
+    it('should return 10LTC', function() {
+      var tenltc = 10 * 1e8;
+      var tenltcBuffer = new Buffer('00ca9a3b00000000', 'hex');
+      var br = new BufferReader(tenltcBuffer);
+      br.readUInt64LEBN().toNumber().should.equal(tenltc);
     });
 
     it('should return 2^30', function() {
