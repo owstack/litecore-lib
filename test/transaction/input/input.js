@@ -1,16 +1,17 @@
 'use strict';
 
-var should = require('chai').should();
 var expect = require('chai').expect;
-var _ = require('lodash');
 
-var bitcore = require('../../..');
-var errors = bitcore.errors;
-var PrivateKey = bitcore.PrivateKey;
-var Address = bitcore.Address;
-var Script = bitcore.Script;
-var Networks = bitcore.Networks;
-var Input = bitcore.Transaction.Input;
+var owsCommon = require('@owstack/ows-common');
+var keyLib = require('@owstack/key-lib');
+var ltcLib = require('../../..');
+var Address = ltcLib.Address;
+var errors = owsCommon.errors;
+var Input = ltcLib.Transaction.Input;
+var Networks = ltcLib.Networks;
+var PrivateKey = keyLib.PrivateKey;
+var Script = ltcLib.Script;
+var lodash = owsCommon.deps.lodash;
 
 describe('Transaction.Input', function() {
 
@@ -22,13 +23,13 @@ describe('Transaction.Input', function() {
     prevTxId: '66e64ef8a3b384164b78453fa8c8194de9a473ba14f89485a0e433699daec140',
     outputIndex: 0,
     script: new Script(address),
-    satoshis: 1000000
+    litoshis: 1000000
   };
   var coinbase = {
     prevTxId: '0000000000000000000000000000000000000000000000000000000000000000',
     outputIndex: 0xFFFFFFFF,
     script: new Script(),
-    satoshis: 1000000
+    litoshis: 1000000
   };
 
   var coinbaseJSON = JSON.stringify({
@@ -45,7 +46,7 @@ describe('Transaction.Input', function() {
       '4f13242102200757c17b36e3d0492fb9cf597032e5afbea67a59274e64af5a05d12e5ea2303901 ' +
       '33 0x0223078d2942df62c45621d209fab84ea9a7a23346201b7727b9b45a29c4e76f5e',
     output: {
-      'satoshis':100000,
+      'litoshis':100000,
       'script':'OP_DUP OP_HASH160 20 0x88d9931ea73d60eaf7e5671efc0552b912911f2a ' +
         'OP_EQUALVERIFY OP_CHECKSIG'
     }

@@ -2,20 +2,23 @@
 
 var should = require('chai').should();
 var sinon = require('sinon');
-var bitcore = require('../..');
-var Interpreter = bitcore.Script.Interpreter;
-var Transaction = bitcore.Transaction;
-var PrivateKey = bitcore.PrivateKey;
-var Script = bitcore.Script;
-var BN = bitcore.crypto.BN;
-var BufferWriter = bitcore.encoding.BufferWriter;
-var Opcode = bitcore.Opcode;
-var _ = require('lodash');
 
+var owsCommon = require('@owstack/ows-common');
+var keyLib = require('@owstack/key-lib');
+var ltcLib = require('../..');
+var Address = ltcLib.Address;
+var BN = owsCommon.BN;
+var BufferWriter = owsCommon.encoding.BufferWriter;
+var Interpreter = ltcLib.Script.Interpreter;
+var Opcode = ltcLib.Opcode;
+var PrivateKey = keyLib.PrivateKey;
+var Script = ltcLib.Script;
 var script_valid = require('../data/bitcoind/script_valid');
 var script_invalid = require('../data/bitcoind/script_invalid');
+var Transaction = ltcLib.Transaction;
 var tx_valid = require('../data/bitcoind/tx_valid');
 var tx_invalid = require('../data/bitcoind/tx_invalid');
+var lodash = owsCommon.deps.lodash;
 
 //the script string format used in bitcoind data tests
 Script.fromBitcoindString = function(str) {
@@ -104,18 +107,18 @@ describe('Interpreter', function() {
       var version = 1;
       var program = new Buffer('bcbd1db07ce89d1f4050645c26c90ce78b67eff78460002a4d5c10410958e064', 'hex');
       var witness = [new Buffer('bda0eeeb166c8bfeaee88dedc8efa82d3bea35aac5be253902f59d52908bfe25', 'hex')];
-      var satoshis = 1;
+      var litoshis = 1;
       var flags = 0;
-      si.verifyWitnessProgram(version, program, witness, satoshis, flags).should.equal(true);
+      si.verifyWitnessProgram(version, program, witness, litoshis, flags).should.equal(true);
     });
     it('will return false with error if witness length is 0', function() {
       var si = Interpreter();
       var version = 0;
       var program = new Buffer('bcbd1db07ce89d1f4050645c26c90ce78b67eff78460002a4d5c10410958e064', 'hex');
       var witness = [];
-      var satoshis = 1;
+      var litoshis = 1;
       var flags = 0;
-      si.verifyWitnessProgram(version, program, witness, satoshis, flags).should.equal(false);
+      si.verifyWitnessProgram(version, program, witness, litoshis, flags).should.equal(false);
       si.errstr.should.equal('SCRIPT_ERR_WITNESS_PROGRAM_WITNESS_EMPTY');
     });
     it('will return false if program hash mismatch (version 0, 32 byte program)', function() {
@@ -126,9 +129,9 @@ describe('Interpreter', function() {
         new Buffer('0000000000000000000000000000000000000000000000000000000000000000', 'hex'),
         new Buffer('0000000000000000000000000000000000000000000000000000000000000000', 'hex')
       ];
-      var satoshis = 1;
+      var litoshis = 1;
       var flags = 0;
-      si.verifyWitnessProgram(version, program, witness, satoshis, flags).should.equal(false);
+      si.verifyWitnessProgram(version, program, witness, litoshis, flags).should.equal(false);
       si.errstr.should.equal('SCRIPT_ERR_WITNESS_PROGRAM_MISMATCH');
     });
     it('will return false if witness stack doesn\'t have two items (version 0, 20 byte program)', function() {
@@ -140,9 +143,9 @@ describe('Interpreter', function() {
         new Buffer('0000000000000000000000000000000000000000000000000000000000000000', 'hex'),
         new Buffer('0000000000000000000000000000000000000000000000000000000000000000', 'hex')
       ];
-      var satoshis = 1;
+      var litoshis = 1;
       var flags = 0;
-      si.verifyWitnessProgram(version, program, witness, satoshis, flags).should.equal(false);
+      si.verifyWitnessProgram(version, program, witness, litoshis, flags).should.equal(false);
       si.errstr.should.equal('SCRIPT_ERR_WITNESS_PROGRAM_MISMATCH');
     });
     it('will return false if program wrong length for version 0', function() {
@@ -152,9 +155,9 @@ describe('Interpreter', function() {
       var witness = [
         new Buffer('0000000000000000000000000000000000000000000000000000000000000000', 'hex')
       ];
-      var satoshis = 1;
+      var litoshis = 1;
       var flags = 0;
-      si.verifyWitnessProgram(version, program, witness, satoshis, flags).should.equal(false);
+      si.verifyWitnessProgram(version, program, witness, litoshis, flags).should.equal(false);
       si.errstr.should.equal('SCRIPT_ERR_WITNESS_PROGRAM_WRONG_LENGTH');
     });
     it('will return false with discourage upgradable witness program', function() {
@@ -165,9 +168,9 @@ describe('Interpreter', function() {
         new Buffer('0000000000000000000000000000000000000000000000000000000000000000', 'hex'),
         new Buffer('0000000000000000000000000000000000000000000000000000000000000000', 'hex')
       ];
-      var satoshis = 1;
+      var litoshis = 1;
       var flags = Interpreter.SCRIPT_VERIFY_DISCOURAGE_UPGRADABLE_WITNESS_PROGRAM;
-      si.verifyWitnessProgram(version, program, witness, satoshis, flags).should.equal(false);
+      si.verifyWitnessProgram(version, program, witness, litoshis, flags).should.equal(false);
       si.errstr.should.equal('SCRIPT_ERR_DISCOURAGE_UPGRADABLE_WITNESS_PROGRAM');
     });
     it('will return false with error if stack doesn\'t have exactly one item', function() {
@@ -179,9 +182,9 @@ describe('Interpreter', function() {
         new Buffer('0000000000000000000000000000000000000000000000000000000000000000', 'hex'),
         new Buffer('0000000000000000000000000000000000000000000000000000000000000000', 'hex')
       ];
-      var satoshis = 1;
+      var litoshis = 1;
       var flags = 0;
-      si.verifyWitnessProgram(version, program, witness, satoshis, flags).should.equal(false);
+      si.verifyWitnessProgram(version, program, witness, litoshis, flags).should.equal(false);
       si.errstr.should.equal('SCRIPT_ERR_EVAL_FALSE');
     });
     it('will return false if last item in stack casts to false', function() {
@@ -196,9 +199,9 @@ describe('Interpreter', function() {
         new Buffer('0000000000000000000000000000000000000000000000000000000000000000', 'hex'),
         new Buffer('0000000000000000000000000000000000000000000000000000000000000000', 'hex')
       ];
-      var satoshis = 1;
+      var litoshis = 1;
       var flags = 0;
-      si.verifyWitnessProgram(version, program, witness, satoshis, flags).should.equal(false);
+      si.verifyWitnessProgram(version, program, witness, litoshis, flags).should.equal(false);
       si.errstr.should.equal('SCRIPT_ERR_EVAL_FALSE_IN_STACK');
     });
   });
@@ -240,7 +243,7 @@ describe('Interpreter', function() {
         txId: 'a477af6b2667c29670467e4e0728b685ee07b240235771862318e29ddbe58458',
         outputIndex: 0,
         script: scriptPubkey,
-        satoshis: 100000
+        litoshis: 100000
       };
       var tx = new Transaction()
         .from(utxo)
@@ -316,7 +319,7 @@ describe('Interpreter', function() {
     }));
     credtx.addOutput(new Transaction.Output({
       script: scriptPubkey,
-      satoshis: 0
+      litoshis: 0
     }));
     var idbuf = credtx.id;
 
@@ -329,7 +332,7 @@ describe('Interpreter', function() {
     }));
     spendtx.addOutput(new Transaction.Output({
       script: new Script(),
-      satoshis: 0
+      litoshis: 0
     }));
 
     var interp = new Interpreter();

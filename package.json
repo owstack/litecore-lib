@@ -1,7 +1,7 @@
 {
   "name": "@owstack/ltc-lib",
   "version": "0.0.8",
-  "description": "A pure and powerful JavaScript Bitcoin library.",
+  "description": "A Javascript library to build litecoin and blockchain-based applications.",
   "main": "index.js",
   "scripts": {
     "lint": "gulp lint",
@@ -34,20 +34,18 @@
     "request": "browser-request"
   },
   "dependencies": {
-    "@owstack/ows-common": "^0.0.5",
-    "bn.js": "=4.11.8",
-    "bs58": "=4.0.1",
-    "buffer-compare": "=1.1.1",
-    "elliptic": "=6.4.0",
+    "@owstack/ows-common": "^0.0.9",
+    "@owstack/key-lib": "^0.0.14",
+    "@owstack/network-lib": "^0.0.3",
+    "buffer-compare": "=1.0.0",
     "inherits": "=2.0.1",
-    "lodash": "=4.17.4",
     "scryptsy": "=2.0.0"
   },
   "devDependencies": {
-    "@owstack/ows-build": "^0.0.3",
+    "@owstack/ows-build": "^0.0.12",
     "brfs": "^1.2.0",
     "chai": "^1.10.0",
-    "gulp": "^3.9.1",
+    "gulp": "^3.8.10",
     "sinon": "^1.13.0"
   },
   "license": "MIT"

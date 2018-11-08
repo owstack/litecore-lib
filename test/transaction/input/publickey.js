@@ -1,9 +1,12 @@
 'use strict';
 
 var should = require('chai').should();
-var bitcore = require('../../..');
-var Transaction = bitcore.Transaction;
-var PrivateKey = bitcore.PrivateKey;
+
+var keyLib = require('@owstack/key-lib');
+var ltcLib = require('../../..');
+var Address = ltcLib.Address;
+var PrivateKey = keyLib.PrivateKey;
+var Transaction = ltcLib.Transaction;
 
 describe('PublicKeyInput', function() {
 

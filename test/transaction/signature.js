@@ -2,32 +2,34 @@
 
 /* jshint unused: false */
 /* jshint latedef: false */
-var should = require('chai').should();
 var expect = require('chai').expect;
-var _ = require('lodash');
+var should = require('chai').should();
 
-var bitcore = require('../..');
-var Transaction = bitcore.Transaction;
-var TransactionSignature = bitcore.Transaction.Signature;
-var Script = bitcore.Script;
-var PrivateKey = bitcore.PrivateKey;
-var errors = bitcore.errors;
+var owsCommon = require('@owstack/ows-common');
+var keyLib = require('@owstack/key-lib');
+var ltcLib = require('../..');
+var errors = owsCommon.errors;
+var Script = ltcLib.Script;
+var PrivateKey = keyLib.PrivateKey;
+var Transaction = ltcLib.Transaction;
+var TransactionSignature = ltcLib.Transaction.Signature;
+var lodash = owsCommon.deps.lodash;
 
 describe('TransactionSignature', function() {
 
   var fromAddress = 'mszYqVnqKoQx4jcTdJXxwKAissE3Jbrrc1';
   var privateKey = 'cSBnVM4xvxarwGQuAfQFwqDg9k5tErHUHzgWsEfD4zdwUasvqRVY';
-  var simpleUtxoWith100000Satoshis = {
+  var simpleUtxoWith100000Litoshis = {
     address: fromAddress,
     txId: 'a477af6b2667c29670467e4e0728b685ee07b240235771862318e29ddbe58458',
     outputIndex: 0,
     script: Script.buildPublicKeyHashOut(fromAddress).toString(),
-    satoshis: 100000
+    litoshis: 100000
   };
 
   var getSignatureFromTransaction = function() {
     var transaction = new Transaction();
-    transaction.from(simpleUtxoWith100000Satoshis);
+    transaction.from(simpleUtxoWith100000Litoshis);
     return transaction.getSignatures(privateKey)[0];
   };
 
@@ -68,7 +70,7 @@ describe('TransactionSignature', function() {
       txId: '0000000000000000000000000000000000000000000000000000000000000000', // Not relevant
       outputIndex: 0,
       script: Script.buildMultisigOut([public1, public2], 2).toScriptHashOut(),
-      satoshis: 100000
+      litoshis: 100000
     };
     var transaction = new Transaction().from(utxo, [public1, public2], 2);
     var signatures = transaction.getSignatures(private1);
@@ -79,7 +81,7 @@ describe('TransactionSignature', function() {
 
   it('can be aplied to a Transaction with Transaction#addSignature', function() {
     var transaction = new Transaction();
-    transaction.from(simpleUtxoWith100000Satoshis);
+    transaction.from(simpleUtxoWith100000Litoshis);
     var signature = transaction.getSignatures(privateKey)[0];
     var addSignature = function() {
       return transaction.applySignature(signature);

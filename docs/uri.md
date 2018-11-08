@@ -1,5 +1,5 @@
-# Bitcoin URIs
-Represents a litecoin payment URI. Bitcoin URI strings became the most popular way to share payment request, sometimes as a litecoin link and others using a QR code.
+# Litecoin URIs
+Represents a litecoin payment URI. Litecoin URI strings became the most popular way to share payment request, sometimes as a litecoin link and others using a QR code.
 
 URI Examples:
 

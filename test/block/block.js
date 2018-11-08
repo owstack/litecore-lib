@@ -1,15 +1,14 @@
 'use strict';
 
-var bitcore = require('../..');
-var BN = require('../../lib/crypto/bn');
-var BufferReader = bitcore.encoding.BufferReader;
-var BufferWriter = bitcore.encoding.BufferWriter;
-var BlockHeader = bitcore.BlockHeader;
-var Block = bitcore.Block;
-var chai = require('chai');
+ar owsCommon = require('@owstack/ows-common');
+var ltcLib = require('../..');
+var BN = owsCommon.BN;
+var BufferReader = owsCommon.encoding.BufferReader;
+var BufferWriter = owsCommon.encoding.BufferWriter;
+var BlockHeader = ltcLib.BlockHeader;
+var Block = ltcLib.Block;
 var fs = require('fs');
-var should = chai.should();
-var Transaction = bitcore.Transaction;
+var Transaction = ltcLib.Transaction;
 
 // https://test-insight.bitpay.com/block/000000000b99b16390660d79fcc138d2ad0c89a0d044c4201a02bdf1f61ffa11
 var dataRawBlockBuffer = fs.readFileSync('litecoin-utils/outputs/blk400000-litecore.dat');
@@ -192,7 +191,7 @@ describe('Block', function() {
             script: '045dec8f4e0102'
           }],
           outputs: [{
-            satoshis: 5000000000,
+            litoshis: 5000000000,
             script: '4104284464458f95a72e610ecd7a561e8c2bdb46c491b347e4a375aa8f2e3b3ed5' +
               '6e99552e789265b6e52a2fc9a00edcdd6c032979dd81a7f1201b62427076768a7aac'
           }],

@@ -15,8 +15,8 @@
 
 // Manually check if blk400000-litecore.json match with blk400000.json
 
-var bitcore = require('..');
-var Block = bitcore.Block;
+var ltcLib = require('..');
+var Block = ltcLib.Block;
 var fs = require('fs');
 
 var first8Bytes = new Buffer ([0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF]); // won't be used in block allocation, just fill with some inane values

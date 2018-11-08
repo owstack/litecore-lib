@@ -1,17 +1,19 @@
 'use strict';
 /* jshint unused: false */
 
-var should = require('chai').should();
 var expect = require('chai').expect;
-var _ = require('lodash');
+var should = require('chai').should();
 
-var bitcore = require('../../..');
-var Transaction = bitcore.Transaction;
-var PrivateKey = bitcore.PrivateKey;
-var Address = bitcore.Address;
-var Script = bitcore.Script;
-var Networks = bitcore.Networks;
-var Signature = bitcore.crypto.Signature;
+var owsCommon = require('@owstack/ows-common');
+var keyLib = require('@owstack/key-lib');
+var ltcLib = require('../../..');
+var Address = ltcLib.Address;
+var PrivateKey = keyLib.PrivateKey;
+var Networks = ltcLib.Networks;
+var Script = ltcLib.Script;
+var Signature = keyLib.crypto.Signature;
+var Transaction = ltcLib.Transaction;
+var lodash = owsCommon.deps.lodash;
 
 describe('PublicKeyHashInput', function() {
 
@@ -24,7 +26,7 @@ describe('PublicKeyHashInput', function() {
     txId: '66e64ef8a3b384164b78453fa8c8194de9a473ba14f89485a0e433699daec140',
     outputIndex: 0,
     script: new Script(address),
-    satoshis: 1000000
+    litoshis: 1000000
   };
   it('can count missing signatures', function() {
     var transaction = new Transaction()

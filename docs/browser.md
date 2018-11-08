@@ -5,7 +5,7 @@ The easiest and recommended way to use them, is via [Bower](http://bower.io/), a
 
 ```sh
 bower install ltc-lib
-bower install bitcore-mnemonic
+bower install mnemonic-lib
 ```
 
 You can also use a `bower.json` file to store the dependencies of your project:
@@ -16,8 +16,8 @@ You can also use a `bower.json` file to store the dependencies of your project:
   "version": "0.0.1",
   "license": "MIT",
   "dependencies": {
-    "ltc-lib": "^0.13.7",
-    "bitcore-mnemonic": "^1.0.1"
+    "ltc-lib": "...",
+    "mnemonic-lib": "..."
   }
 }
 ```
@@ -33,14 +33,14 @@ After this, you can include the bundled release versions in your HTML file:
 <head>
   <meta charset="utf-8">
   <script src="bower_components/owstack/ltc-lib.min.js"></script>
-  <script src="bower_components/bitcore-mnemonic/bitcore-mnemonic.min.js"></script>
+  <script src="bower_components/owstack/mnemonic-lib/bitcore-mnemonic.min.js"></script>
 </head>
 
 <body>
 
   <script type="text/javascript">
     var ltcLib = require('ltc-lib');
-    var Mnemonic = require('bitcore-mnemonic');
+    var Mnemonic = require('mnemonic-lib');
     // etc...
   </script>
 
@@ -57,7 +57,7 @@ browserify --require ./index.js:ltc-lib | uglifyjs > ltc-lib.min.js
 ```
 
 ```sh
-browserify --require ./index.js:bitcore-mnemonic --external ltc-lib | uglifyjs > bitcore-mnemonic.min.js
+browserify --require ./index.js:mnemonic-lib --external ltc-lib | uglifyjs > mnemonic-lib.min.js
 ```
 
 In many of the modules you can also run the command to build a browser bundle:

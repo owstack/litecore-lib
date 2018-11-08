@@ -1,11 +1,12 @@
 'use strict';
 
 var chai = chai || require('chai');
-var bitcore = require('..');
 var expect = chai.expect;
-var Networks = bitcore.Networks;
 var should = chai.should();
-var URI = bitcore.URI;
+
+var ltcLib = require('..');
+var Networks = ltcLib.Networks;
+var URI = ltcLib.URI;
 
 describe('URI', function() {
   /* jshint maxstatements: 30 */
@@ -51,14 +52,14 @@ describe('URI', function() {
     URI.isValid('litecoin:LXc3QtfC179bxQV83r3XaFKfsgXsKGeZv3?amount=1.2&req-other=param',
                 ['req-other']).should.equal(true);
     URI.isValid('litecoin:mmrqEBJxUCf42vdb3oozZtyz5mKr3Vb2Em?amount=0.1&' +
-                'r=https%3A%2F%2Ftest.bitpay.com%2Fi%2F6DKgf8cnJC388irbXk5hHu').should.equal(true);
+                'r=https%3A%2F%2Ftest.openwalletstack.com%2Fi%2F6DKgf8cnJC388irbXk5hHu').should.equal(true);
 
     URI.isValid('litecoin:').should.equal(false);
     URI.isValid('litecoin:badUri').should.equal(false);
     URI.isValid('litecoin:LXc3QtfC179bxQV83r3XaFKfsgXsKGeZv3?amount=bad').should.equal(false);
     URI.isValid('litecoin:LXc3QtfC179bxQV83r3XaFKfsgXsKGeZv3?amount=1.2&req-other=param')
                 .should.equal(false);
-    URI.isValid('litecoin:?r=https%3A%2F%2Ftest.bitpay.com%2Fi%2F6DKgf8cnJC388irbXk5hHu')
+    URI.isValid('litecoin:?r=https%3A%2F%2Ftest.openwalletstack.com%2Fi%2F6DKgf8cnJC388irbXk5hHu')
                 .should.equal(false);
   });
 
@@ -68,18 +69,13 @@ describe('URI', function() {
     }).should.throw(TypeError);
   });
 
-  it('do not need new keyword', function() {
-    var uri = URI('litecoin:LXc3QtfC179bxQV83r3XaFKfsgXsKGeZv3');
-    uri.should.be.instanceof(URI);
-  });
-
   describe('instantiation from litecoin uri', function() {
     /* jshint maxstatements: 25 */
     var uri;
 
     it('parses address', function() {
       uri = new URI('litecoin:LXc3QtfC179bxQV83r3XaFKfsgXsKGeZv3');
-      uri.address.should.be.instanceof(bitcore.Address);
+      uri.address.should.be.instanceof(ltcLib.Address);
       uri.network.should.equal(Networks.livenet);
     });
 
@@ -92,13 +88,13 @@ describe('URI', function() {
 
     it('parses a testnet address', function() {
       uri = new URI('litecoin:mkYY5NRvikVBY1EPtaq9fAFgquesdjqECw');
-      uri.address.should.be.instanceof(bitcore.Address);
+      uri.address.should.be.instanceof(ltcLib.Address);
       uri.network.should.equal(Networks.testnet);
     });
 
     it('stores unknown parameters as "extras"', function() {
       uri = new URI('litecoin:LXc3QtfC179bxQV83r3XaFKfsgXsKGeZv3?amount=1.2&other=param');
-      uri.address.should.be.instanceof(bitcore.Address);
+      uri.address.should.be.instanceof(ltcLib.Address);
       expect(uri.other).to.be.undefined();
       uri.extras.other.should.equal('param');
     });
@@ -112,7 +108,7 @@ describe('URI', function() {
     it('has no false negative when checking supported features', function() {
       uri = new URI('litecoin:LXc3QtfC179bxQV83r3XaFKfsgXsKGeZv3?amount=1.2&other=param&' +
                     'req-required=param', ['req-required']);
-      uri.address.should.be.instanceof(bitcore.Address);
+      uri.address.should.be.instanceof(ltcLib.Address);
       uri.amount.should.equal(120000000);
       uri.extras.other.should.equal('param');
       uri.extras['req-required'].should.equal('param');
@@ -127,13 +123,13 @@ describe('URI', function() {
     uri = new URI({
       address: 'LXc3QtfC179bxQV83r3XaFKfsgXsKGeZv3'
     });
-    uri.address.should.be.instanceof(bitcore.Address);
+    uri.address.should.be.instanceof(ltcLib.Address);
     uri.network.should.equal(Networks.livenet);
 
     uri = new URI({
       address: 'mkYY5NRvikVBY1EPtaq9fAFgquesdjqECw'
     });
-    uri.address.should.be.instanceof(bitcore.Address);
+    uri.address.should.be.instanceof(ltcLib.Address);
     uri.network.should.equal(Networks.testnet);
 
     uri = new URI({
@@ -141,7 +137,7 @@ describe('URI', function() {
       amount: 120000000,
       other: 'param'
     });
-    uri.address.should.be.instanceof(bitcore.Address);
+    uri.address.should.be.instanceof(ltcLib.Address);
     uri.amount.should.equal(120000000);
     expect(uri.other).to.be.undefined();
     uri.extras.other.should.equal('param');
@@ -159,7 +155,7 @@ describe('URI', function() {
       other: 'param',
       'req-required': 'param'
     }, ['req-required']);
-    uri.address.should.be.instanceof(bitcore.Address);
+    uri.address.should.be.instanceof(ltcLib.Address);
     uri.amount.should.equal(120000000);
     uri.extras.other.should.equal('param');
     uri.extras['req-required'].should.equal('param');
@@ -183,7 +179,10 @@ describe('URI', function() {
       label: 'myLabel',
       other: 'xD'
     });
-    JSON.stringify(URI.fromObject(JSON.parse(json))).should.equal(json);
+    var obj = URI.fromObject(JSON.parse(json));
+    obj.protocol.should.equal('litecoin');
+    delete obj.protocol;
+    JSON.stringify(obj).should.equal(json);
   });
 
   it('should support numeric amounts', function() {
@@ -224,7 +223,7 @@ describe('URI', function() {
   });
 
   it('should be case insensitive to protocol', function() {
-    var uri1 = new URI('lItEcOin:LXc3QtfC179bxQV83r3XaFKfsgXsKGeZv3');
+    var uri1 = new URI('litecoin:LXc3QtfC179bxQV83r3XaFKfsgXsKGeZv3');
     var uri2 = new URI('litecoin:LXc3QtfC179bxQV83r3XaFKfsgXsKGeZv3');
 
     uri1.address.toString().should.equal(uri2.address.toString());
@@ -232,7 +231,7 @@ describe('URI', function() {
 
   it('writes correctly the "r" parameter on string serialization', function() {
     var originalString = 'litecoin:mmrqEBJxUCf42vdb3oozZtyz5mKr3Vb2Em?amount=0.1&' +
-                         'r=https%3A%2F%2Ftest.bitpay.com%2Fi%2F6DKgf8cnJC388irbXk5hHu';
+                         'r=https%3A%2F%2Ftest.openwalletstack.com%2Fi%2F6DKgf8cnJC388irbXk5hHu';
     var uri = new URI(originalString);
     uri.toString().should.equal(originalString);
   });

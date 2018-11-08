@@ -2,12 +2,13 @@
 
 var should = require('chai').should();
 
-var bitcore = require('../..');
-var MerkleBlock = bitcore.MerkleBlock;
-var BufferReader = bitcore.encoding.BufferReader;
-var BufferWriter = bitcore.encoding.BufferWriter;
-var Transaction = bitcore.Transaction;
+var owsCommon = require('@owstack/ows-common');
+var ltcLib = require('../..');
+var BufferReader = owsCommon.encoding.BufferReader;
+var BufferWriter = owsCommon.encoding.BufferWriter;
 var data = require('../data/merkleblocks.js');
+var MerkleBlock = ltcLib.MerkleBlock;
+var Transaction = ltcLib.Transaction;
 var transactionVector = require('../data/tx_creation');
 
 

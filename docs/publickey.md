@@ -1,5 +1,5 @@
 # Public Key
-Represents a bitcoin public key and is needed to be able to receive bitcoin, as is usually represented as a bitcoin [Address](address.md). See the official [Bitcoin Wiki](https://en.bitcoin.it/wiki/Technical_background_of_version_1_Bitcoin_addresses).
+Represents a litecoin public key and is needed to be able to receive litecoin, as is usually represented as a bitcoin [Address](address.md). See the official [Bitcoin Wiki](https://en.bitcoin.it/wiki/Technical_background_of_version_1_Bitcoin_addresses).
 
 A PublicKey in Litecore is an immutable object and can be instantiated from a [Point](crypto.md), string, [PrivateKey](privatekey.md), Buffer or a [BN](crypto.md).
 

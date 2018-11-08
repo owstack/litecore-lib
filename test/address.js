@@ -3,17 +3,18 @@
 /* jshint maxstatements: 30 */
 
 var chai = require('chai');
-var should = chai.should();
 var expect = chai.expect;
+var should = chai.should();
 
-var bitcore = require('..');
-var PublicKey = bitcore.PublicKey;
-var Address = bitcore.Address;
-var Script = bitcore.Script;
-var Networks = bitcore.Networks;
-
-var validbase58 = require('./data/bitcoind/base58_keys_valid.json');
+var owsCommon = require('@owstack/ows-common');
+var keyLib = require('@owstack/key-lib');
+var ltcLib = require('..');
+var Address = ltcLib.Address;
 var invalidbase58 = require('./data/bitcoind/base58_keys_invalid.json');
+var Networks = ltcLib.Networks;
+var PublicKey = keyLib.PublicKey;
+var Script = ltcLib.Script;
+var validbase58 = require('./data/bitcoind/base58_keys_valid.json');
 
 describe('Address', function() {
 
@@ -307,7 +308,7 @@ describe('Address', function() {
     it('should error because of unrecognized data format', function() {
       (function() {
         return new Address(new Error());
-      }).should.throw(bitcore.errors.InvalidArgument);
+      }).should.throw(owsCommon.errors.InvalidArgument);
     });
 
     it('should error because of incorrect format for pubkey hash', function() {
@@ -523,7 +524,7 @@ describe('Address', function() {
     it('will fail with invalid state', function() {
       expect(function() {
         return Address.fromObject('¹');
-      }).to.throw(bitcore.errors.InvalidState);
+      }).to.throw(owsCommon.errors.InvalidState);
     });
   });
 

@@ -1,11 +1,10 @@
 'use strict';
 
-var _ = require('lodash');
-var chai = require('chai');
-var should = chai.should();
-var expect = chai.expect;
-var bitcore = require('..');
-var Opcode = bitcore.Opcode;
+var owsCommon = require('@owstack/ows-common');
+var BufferUtil = owsCommon.buffer;
+var JSUtil = owsCommon.util.js;
+var lodash = owsCommon.deps.lodash;
+var $ = owsCommon.util.preconditions;
 
 describe('Opcode', function() {
 
@@ -64,7 +63,7 @@ describe('Opcode', function() {
       Opcode.fromString('OP_0').num.should.equal(0);
     });
     it('should fail for invalid string', function() {
-      Opcode.fromString.bind(null, 'OP_SATOSHI').should.throw('Invalid opcodestr');
+      Opcode.fromString.bind(null, 'OP_LITOSHI').should.throw('Invalid opcodestr');
       Opcode.fromString.bind(null, 'BANANA').should.throw('Invalid opcodestr');
     });
     it('should fail for non-string', function() {

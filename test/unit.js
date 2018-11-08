@@ -1,11 +1,12 @@
 'use strict';
 
-var should = require('chai').should();
 var expect = require('chai').expect;
+var should = require('chai').should();
 
-var bitcore = require('..');
-var errors = bitcore.errors;
-var Unit = bitcore.Unit;
+var owsCommon = require('@owstack/ows-common');
+var ltcLib = require('..');
+var errors = owsCommon.errors;
+var Unit = ltcLib.Unit;
 
 describe('Unit', function() {
 
@@ -18,16 +19,6 @@ describe('Unit', function() {
   it('can be created from a number and exchange rate', function() {
     expect(function() {
       return new Unit(1.2, 350);
-    }).to.not.throw();
-  });
-
-  it('no "new" is required for creating an instance', function() {
-    expect(function() {
-      return Unit(1.2, 'LTC');
-    }).to.not.throw();
-
-    expect(function() {
-      return Unit(1.2, 350);
     }).to.not.throw();
   });
 
@@ -46,16 +37,13 @@ describe('Unit', function() {
     unit = Unit.fromLTC('1.00001');
     unit.LTC.should.equal(1.00001);
 
-    unit = Unit.fromMilis('1.00001');
-    unit.mLTC.should.equal(1.00001);
-
     unit = Unit.fromMillis('1.00001');
     unit.mLTC.should.equal(1.00001);
 
-    unit = Unit.fromBits('100');
+    unit = Unit.fromPhotons('100');
     unit.photons.should.equal(100);
 
-    unit = Unit.fromSatoshis('8999');
+    unit = Unit.fromLitoshis('8999');
     unit.litoshis.should.equal(8999);
 
     unit = Unit.fromFiat('43', 350);
@@ -68,13 +56,13 @@ describe('Unit', function() {
     unit = Unit.fromLTC(1.00001);
     unit.LTC.should.equal(1.00001);
 
-    unit = Unit.fromMilis(1.00001);
+    unit = Unit.fromMillis(1.00001);
     unit.mLTC.should.equal(1.00001);
 
-    unit = Unit.fromBits(100);
+    unit = Unit.fromPhotons(100);
     unit.photons.should.equal(100);
 
-    unit = Unit.fromSatoshis(8999);
+    unit = Unit.fromLitoshis(8999);
     unit.litoshis.should.equal(8999);
 
     unit = Unit.fromFiat(43, 350);
@@ -90,17 +78,17 @@ describe('Unit', function() {
     unit.photons.should.equal(1300000);
     unit.litoshis.should.equal(130000000);
 
-    unit = Unit.fromMilis(1.3);
+    unit = Unit.fromMillis(1.3);
     unit.LTC.should.equal(0.0013);
     unit.photons.should.equal(1300);
     unit.litoshis.should.equal(130000);
 
-    unit = Unit.fromBits(1.3);
+    unit = Unit.fromPhotons(1.3);
     unit.LTC.should.equal(0.0000013);
     unit.mLTC.should.equal(0.0013);
     unit.litoshis.should.equal(130);
 
-    unit = Unit.fromSatoshis(3);
+    unit = Unit.fromLitoshis(3);
     unit.LTC.should.equal(0.00000003);
     unit.mLTC.should.equal(0.00003);
     unit.photons.should.equal(0.03);
@@ -138,9 +126,8 @@ describe('Unit', function() {
   it('exposes shorthand conversion methods', function() {
     var unit = new Unit(1.3, 'LTC');
     unit.toLTC().should.equal(unit.LTC);
-    unit.toMilis().should.equal(unit.mLTC);
     unit.toMillis().should.equal(unit.mLTC);
-    unit.toBits().should.equal(unit.photons);
+    unit.toPhotons().should.equal(unit.photons);
     unit.toLitoshis().should.equal(unit.litoshis);
   });
 

@@ -1,13 +1,14 @@
 'use strict';
 
-var bitcore = require('../..');
-var BN = require('../../lib/crypto/bn');
-var BufferReader = bitcore.encoding.BufferReader;
-var BufferWriter = bitcore.encoding.BufferWriter;
-
-var BlockHeader = bitcore.BlockHeader;
-var fs = require('fs');
 var should = require('chai').should();
+
+var owsCommon = require('@owstack/ows-common');
+var fs = require('fs');
+var ltcLib = require('../..');
+var BlockHeader = ltcLib.BlockHeader;
+var BN = owsCommon.BN;
+var BufferReader = owsCommon.encoding.BufferReader;
+var BufferWriter = owsCommon.encoding.BufferWriter;
 
 // https://test-insight.bitpay.com/block/000000000b99b16390660d79fcc138d2ad0c89a0d044c4201a02bdf1f61ffa11
 var dataRawBlockBuffer = fs.readFileSync('litecoin-utils/outputs/blk400000-litecore.dat');

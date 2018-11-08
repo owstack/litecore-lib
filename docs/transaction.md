@@ -1,5 +1,5 @@
 # Transaction
-Litecore provides a very simple API for creating transactions. We expect this API to be accessible for developers without knowing the working internals of litecoin in deep detail. What follows is a small introduction to transactions with some basic knowledge required to use this API.
+The ltc-lib provides a very simple API for creating transactions. We expect this API to be accessible for developers without knowing the working internals of litecoin in deep detail. What follows is a small introduction to transactions with some basic knowledge required to use this API.
 
 A Transaction contains a set of inputs and a set of outputs. Each input contains a reference to another transaction's output, and a signature that allows the value referenced in that output to be used in this transaction.
 
