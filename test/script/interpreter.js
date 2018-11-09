@@ -13,15 +13,15 @@ var Interpreter = ltcLib.Script.Interpreter;
 var Opcode = ltcLib.Opcode;
 var PrivateKey = keyLib.PrivateKey;
 var Script = ltcLib.Script;
-var script_valid = require('../data/bitcoind/script_valid');
-var script_invalid = require('../data/bitcoind/script_invalid');
+var script_valid = require('../data/litecoind/script_valid');
+var script_invalid = require('../data/litecoind/script_invalid');
 var Transaction = ltcLib.Transaction;
-var tx_valid = require('../data/bitcoind/tx_valid');
-var tx_invalid = require('../data/bitcoind/tx_invalid');
+var tx_valid = require('../data/litecoind/tx_valid');
+var tx_invalid = require('../data/litecoind/tx_invalid');
 var lodash = owsCommon.deps.lodash;
 
-//the script string format used in bitcoind data tests
-Script.fromBitcoindString = function(str) {
+//the script string format used in litecoind data tests
+Script.fromLitecoindString = function(str) {
   var bw = new BufferWriter();
   var tokens = str.split(' ');
   for (var i = 0; i < tokens.length; i++) {
@@ -235,7 +235,7 @@ describe('Interpreter', function() {
       // first we create a transaction
       var privateKey = new PrivateKey('cSBnVM4xvxarwGQuAfQFwqDg9k5tErHUHzgWsEfD4zdwUasvqRVY');
       var publicKey = privateKey.publicKey;
-      var fromAddress = publicKey.toAddress();
+      var fromAddress = Address.fromPublicKey(publicKey);
       var toAddress = 'mrU9pEmAx26HcbKVrABvgL7AwA5fjNFoDc';
       var scriptPubkey = Script.buildPublicKeyHashOut(fromAddress);
       var utxo = {
@@ -304,8 +304,8 @@ describe('Interpreter', function() {
   };
 
   var testFixture = function(vector, expected) {
-    var scriptSig = Script.fromBitcoindString(vector[0]);
-    var scriptPubkey = Script.fromBitcoindString(vector[1]);
+    var scriptSig = Script.fromLitecoindString(vector[0]);
+    var scriptPubkey = Script.fromLitecoindString(vector[1]);
     var flags = getFlags(vector[2]);
 
     var hashbuf = new Buffer(32);
@@ -339,7 +339,7 @@ describe('Interpreter', function() {
     var verified = interp.verify(scriptSig, scriptPubkey, spendtx, 0, flags);
     verified.should.equal(expected);
   };
-  describe('bitcoind script evaluation fixtures', function() {
+  describe('litecoind script evaluation fixtures', function() {
     var testAllFixtures = function(set, expected) {
       var c = 0;
       set.forEach(function(vector) {
@@ -361,7 +361,7 @@ describe('Interpreter', function() {
     testAllFixtures(script_invalid, false);
 
   });
-  describe('bitcoind transaction evaluation fixtures', function() {
+  describe('litecoind transaction evaluation fixtures', function() {
     var test_txs = function(set, expected) {
       var c = 0;
       set.forEach(function(vector) {
@@ -381,9 +381,9 @@ describe('Interpreter', function() {
             var txoutnum = input[1];
             var scriptPubKeyStr = input[2];
             if (txoutnum === -1) {
-              txoutnum = 0xffffffff; //bitcoind casts -1 to an unsigned int
+              txoutnum = 0xffffffff; //litecoind casts -1 to an unsigned int
             }
-            map[txid + ':' + txoutnum] = Script.fromBitcoindString(scriptPubKeyStr);
+            map[txid + ':' + txoutnum] = Script.fromLitecoindString(scriptPubKeyStr);
           });
 
           var tx = new Transaction(txhex);

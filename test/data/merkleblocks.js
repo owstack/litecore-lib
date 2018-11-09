@@ -456,13 +456,13 @@ module.exports = {
     },
     { // Mainnet FilteredBlock 399775 with filter: 6f64fd5aa9dd01f74c03656d376625cf80328d83d9afebe60cc68b8f0e245bd9
       "header": {
-      "hash": "0000000000000000011b04bc9f4f3856e299b53a335eb1c42be906237c860bb8",
-      "version": 4,
-      "prevHash": "0000000000000000015373947aa93c7cb16a308fb0a59644d4123072ad24ce5b",
-      "merkleRoot": "ac1841eb3b7d380ee114270e3b1c7df349f1e27e2f0f7891138199bc07e006f8",
-      "time": 1456274787,
-      "bits": 403093919,
-      "nonce": 736568686
+        "hash": "0000000000000000011b04bc9f4f3856e299b53a335eb1c42be906237c860bb8",
+        "version": 4,
+        "prevHash": "0000000000000000015373947aa93c7cb16a308fb0a59644d4123072ad24ce5b",
+        "merkleRoot": "ac1841eb3b7d380ee114270e3b1c7df349f1e27e2f0f7891138199bc07e006f8",
+        "time": 1456274787,
+        "bits": 403093919,
+        "nonce": 736568686
       },
       "numTransactions": 3309,
       "hashes": [

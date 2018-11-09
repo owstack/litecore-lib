@@ -41,7 +41,7 @@ describe('UnspentOutput', function() {
   });
 
   it('fails if vout is not a number', function() {
-    var sample = _.cloneDeep(sampleData2);
+    var sample = lodash.cloneDeep(sampleData2);
     sample.vout = '1';
     expect(function() {
       return new UnspentOutput(sample);

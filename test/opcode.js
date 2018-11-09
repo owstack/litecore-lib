@@ -1,10 +1,13 @@
 'use strict';
 
+var chai = require('chai');
+var expect = chai.expect;
+var should = chai.should();
+
 var owsCommon = require('@owstack/ows-common');
-var BufferUtil = owsCommon.buffer;
-var JSUtil = owsCommon.util.js;
+var ltcLib = require('..');
+var Opcode = ltcLib.Opcode;
 var lodash = owsCommon.deps.lodash;
-var $ = owsCommon.util.preconditions;
 
 describe('Opcode', function() {
 
@@ -85,7 +88,7 @@ describe('Opcode', function() {
 
   describe('@map', function() {
     it('should have a map containing 117 elements', function() {
-      _.size(Opcode.map).should.equal(117);
+      lodash.size(Opcode.map).should.equal(117);
     });
   });
 

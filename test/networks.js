@@ -50,7 +50,7 @@ describe('Networks', function() {
   });
 
   it('tests only for the specified key', function() {
-    expect(Networks.get(0x00, 'prefix.pubkeyhash')).to.equal(Networks.get('LTC'));
+    expect(Networks.get(0x30, 'prefix.pubkeyhash')).to.equal(Networks.get('LTC'));
     // Testnet and Regtest have the same pubkeyhash value.
     expect(Networks.get(0x6f, 'prefix.pubkeyhash').alias).to.equal(Networks.get('TESTNET').alias);
     expect(Networks.get(0x6f, 'prefix.pubkeyhash').alias).to.equal(Networks.testnet.alias);
@@ -58,10 +58,10 @@ describe('Networks', function() {
   });
 
   it('can test for multiple keys', function() {
-    expect(Networks.get(0x00, ['prefix.pubkeyhash', 'prefix.scripthash'])).to.equal(Networks.get('LTC'));
+    expect(Networks.get(0x32, ['prefix.pubkeyhash', 'prefix.scripthash'])).to.equal(Networks.get('LTC'));
     // Testnet and Regtest have the same pubkeyhash value.
     expect(Networks.get(0x6f, ['prefix.pubkeyhash', 'prefix.scripthash']).alias).to.equal(Networks.get('TESTNET').alias);
-    expect(Networks.get(0xc4, ['prefix.pubkeyhash', 'prefix.scripthash']).alias).to.equal(Networks.get('TESTNET').alias);
+    expect(Networks.get(0x3a, ['prefix.pubkeyhash', 'prefix.scripthash']).alias).to.equal(Networks.get('TESTNET').alias);
     expect(Networks.get(0xa0, ['prefix.privatekey', 'port'])).to.equal(undefined);
   });
 

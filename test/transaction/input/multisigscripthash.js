@@ -23,10 +23,10 @@ describe('MultiSigScriptHashInput', function() {
   var public1 = privateKey1.publicKey;
   var public2 = privateKey2.publicKey;
   var public3 = privateKey3.publicKey;
-  var address = new Address('33zbk2aSZYdNbRsMPPt6jgy6Kq1kQreqeb');
+  var address = new Address('MACk3uzQWfUoPw9FVGsSZLDVeXcCKarBfA');
 
   var output = {
-    address: '33zbk2aSZYdNbRsMPPt6jgy6Kq1kQreqeb',
+    address: 'MACk3uzQWfUoPw9FVGsSZLDVeXcCKarBfA',
     txId: '66e64ef8a3b384164b78453fa8c8194de9a473ba14f89485a0e433699daec140',
     outputIndex: 0,
     script: new Script(address),
@@ -56,14 +56,14 @@ describe('MultiSigScriptHashInput', function() {
       .to(address, 1000000);
     var input = transaction.inputs[0];
 
-    _.every(input.publicKeysWithoutSignature(), function(publicKeyMissing) {
+    lodash.every(input.publicKeysWithoutSignature(), function(publicKeyMissing) {
       var serialized = publicKeyMissing.toString();
       return serialized === public1.toString() ||
               serialized === public2.toString() ||
               serialized === public3.toString();
     }).should.equal(true);
     transaction.sign(privateKey1);
-    _.every(input.publicKeysWithoutSignature(), function(publicKeyMissing) {
+    lodash.every(input.publicKeysWithoutSignature(), function(publicKeyMissing) {
       var serialized = publicKeyMissing.toString();
       return serialized === public2.toString() ||
               serialized === public3.toString();
@@ -114,7 +114,7 @@ describe('MultiSigScriptHashInput', function() {
     roundtrip.toObject().should.deep.equal(input.toObject());
   });
   it('will get the scriptCode for nested witness', function() {
-    var address = Address.createMultisig([public1, public2, public3], 2, 'testnet', true);
+    var address = Address.createMultisig([public1, public2, public3], 2, 'TESTNET', true);
     var utxo = {
       address: address.toString(),
       txId: '66e64ef8a3b384164b78453fa8c8194de9a473ba14f89485a0e433699daec140',
@@ -130,7 +130,7 @@ describe('MultiSigScriptHashInput', function() {
     scriptCode.toString('hex').should.equal('695221025c95ec627038e85b5688a9b3d84d28c5ebe66e8c8d697d498e20fe96e3b1ab1d2102cdddfc974d41a62f1f80081deee70592feb7d6e6cf6739d6592edbe7946720e72103c95924e02c240b5545089c69c6432447412b58be43fd671918bd184a5009834353ae');
   });
   it('will get the litoshis buffer for nested witness', function() {
-    var address = Address.createMultisig([public1, public2, public3], 2, 'testnet', true);
+    var address = Address.createMultisig([public1, public2, public3], 2, 'TESTNET', true);
     var utxo = {
       address: address.toString(),
       txId: '66e64ef8a3b384164b78453fa8c8194de9a473ba14f89485a0e433699daec140',

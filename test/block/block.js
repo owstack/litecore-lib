@@ -1,6 +1,6 @@
 'use strict';
 
-ar owsCommon = require('@owstack/ows-common');
+var owsCommon = require('@owstack/ows-common');
 var ltcLib = require('../..');
 var BN = owsCommon.BN;
 var BufferReader = owsCommon.encoding.BufferReader;
@@ -15,7 +15,7 @@ var dataRawBlockBuffer = fs.readFileSync('litecoin-utils/outputs/blk400000-litec
 var dataRawBlockBinary = fs.readFileSync('litecoin-utils/outputs/blk400000-litecore.dat', 'binary');
 var dataJson = fs.readFileSync('litecoin-utils/outputs/blk400000-litecore.json').toString();
 var data = require('../../litecoin-utils/inputs/blk400000');
-var dataBlocks = require('../data/bitcoind/blocks');
+var dataBlocks = require('../data/litecoind/blocks');
 
 describe('Block', function() {
 

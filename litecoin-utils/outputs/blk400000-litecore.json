@@ -22,7 +22,7 @@
       ],
       "outputs": [
         {
-          "satoshis": 5000130000,
+          "litoshis": 5000130000,
           "script": "76a914b453bb7034ca1d997560c732a18b7b90f68c4a7488ac"
         }
       ],
@@ -42,11 +42,11 @@
       ],
       "outputs": [
         {
-          "satoshis": 53257843667,
+          "litoshis": 53257843667,
           "script": "76a914258312f92edba058ee749e5d1fbdef37e1d1c90588ac"
         },
         {
-          "satoshis": 6191856333,
+          "litoshis": 6191856333,
           "script": "76a914705c059c4213ffa9d92308601de26b90cdf129c488ac"
         }
       ],
@@ -192,7 +192,7 @@
       ],
       "outputs": [
         {
-          "satoshis": 23577958,
+          "litoshis": 23577958,
           "script": "76a91469151e191ded265bf3b509a5e329c99eccbd771888ac"
         }
       ],

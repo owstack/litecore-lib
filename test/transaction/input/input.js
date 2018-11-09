@@ -19,7 +19,7 @@ describe('Transaction.Input', function() {
   var publicKey = privateKey.publicKey;
   var address = new Address(publicKey, Networks.livenet);
   var output = {
-    address: '33zbk2aSZYdNbRsMPPt6jgy6Kq1kQreqeb',
+    address: 'MACk3uzQWfUoPw9FVGsSZLDVeXcCKarBfA',
     prevTxId: '66e64ef8a3b384164b78453fa8c8194de9a473ba14f89485a0e433699daec140',
     outputIndex: 0,
     script: new Script(address),
@@ -54,7 +54,7 @@ describe('Transaction.Input', function() {
 
   it('has abstract methods: "getSignatures", "isFullySigned", "addSignature", "clearSignatures"', function() {
     var input = new Input(output);
-    _.each(['getSignatures', 'isFullySigned', 'addSignature', 'clearSignatures'], function(method) {
+    lodash.each(['getSignatures', 'isFullySigned', 'addSignature', 'clearSignatures'], function(method) {
       expect(function() {
         return input[method]();
       }).to.throw(errors.AbstractMethodInvoked);

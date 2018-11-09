@@ -222,7 +222,7 @@ describe('Transaction', function() {
   anyoneCanSpendUTXO.script = new Script().add('OP_TRUE');
   var toAddress = 'mrU9pEmAx26HcbKVrABvgL7AwA5fjNFoDc';
   var changeAddress = 'mgBCJAsvzgT2qNNeXsoECg2uPKrUsZ76up';
-  var changeAddressP2SH = '2N7T3TAetJrSCruQ39aNrJvYLhG1LJosujf';
+  var changeAddressP2SH = 'QaooaBX8KxVJ16A5mgQsPcymqeTAFqTmhh';
   var privateKey = 'cSBnVM4xvxarwGQuAfQFwqDg9k5tErHUHzgWsEfD4zdwUasvqRVY';
   var private1 = '6ce7e97e317d2af16c33db0b9270ec047a91bff3eff8558afb5014afb2bb5976';
   var private2 = 'c9b26b0f771a0d2dad88a44de90f05f416b3b385ff1d989343005546a0032890';
@@ -252,7 +252,7 @@ describe('Transaction', function() {
     p2shPublicKey1,
     p2shPublicKey2,
     p2shPublicKey3
-  ], 2, 'testnet');
+  ], 2, 'TESTNET');
   var p2shUtxoWith1LTC = {
     address: p2shAddress.toString(),
     txId: 'a477af6b2667c29670467e4e0728b685ee07b240235771862318e29ddbe58458',
@@ -374,8 +374,8 @@ describe('Transaction', function() {
       transaction.outputs[1].litoshis.should.equal(10000);
     });
     it('fee per kb can be set up manually', function() {
-      var inputs = _.map(_.range(10), function(i) {
-        var utxo = _.clone(simpleUtxoWith100000Litoshis);
+      var inputs = lodash.map(lodash.range(10), function(i) {
+        var utxo = lodash.clone(simpleUtxoWith100000Litoshis);
         utxo.outputIndex = i;
         return utxo;
       });
@@ -981,7 +981,7 @@ describe('Transaction', function() {
     });
 
     it('allows the user to randomize the output order', function() {
-      var shuffle = sinon.stub(_, 'shuffle');
+      var shuffle = sinon.stub(lodash, 'shuffle');
       shuffle.onFirstCall().returns([out2, out1, out4, out3]);
 
       transaction._changeIndex.should.equal(3);
@@ -992,7 +992,7 @@ describe('Transaction', function() {
       transaction.outputs[3].should.equal(out3);
       transaction._changeIndex.should.equal(2);
 
-      _.shuffle.restore();
+      lodash.shuffle.restore();
     });
 
     it('fails if the provided function does not work as expected', function() {
@@ -1641,7 +1641,7 @@ describe('Transaction', function() {
       var publicKey3 = p2shPrivateKey3.toPublicKey();
       var address = Address.createMultisig([
         publicKey1
-      ], 1, 'testnet', true);
+      ], 1, 'TESTNET', true);
       var utxo = {
         address: address.toString(),
         txId: '1d732950d99f821b8a8d11972ea56000b0666e4d31fa71861ffd80a83797dc61',
