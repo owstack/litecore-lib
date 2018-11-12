@@ -8,6 +8,7 @@ ltcLib.version = 'v' + require('./package.json').version;
 // Main litecoin library
 ltcLib.Address = require('./lib/address');
 ltcLib.Block = require('./lib/block');
+ltcLib.Defaults = require('./lib/common/defaults');
 ltcLib.MerkleBlock = require('./lib/block/merkleblock');
 ltcLib.BlockHeader = require('./lib/block/blockheader');
 ltcLib.Networks = require('./lib/networks');
