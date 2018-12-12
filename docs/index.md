@@ -1,4 +1,4 @@
-# ltc-lib v0.0.1
+# ltc-lib v0.1.2
 
 ## Principles
 
