@@ -252,7 +252,7 @@ describe('Transaction', function() {
     p2shPublicKey1,
     p2shPublicKey2,
     p2shPublicKey3
-  ], 2, 'TESTNET');
+  ], 2, 'LTCTEST');
   var p2shUtxoWith1LTC = {
     address: p2shAddress.toString(),
     txId: 'a477af6b2667c29670467e4e0728b685ee07b240235771862318e29ddbe58458',
@@ -1641,7 +1641,7 @@ describe('Transaction', function() {
       var publicKey3 = p2shPrivateKey3.toPublicKey();
       var address = Address.createMultisig([
         publicKey1
-      ], 1, 'TESTNET', true);
+      ], 1, 'LTCTEST', true);
       var utxo = {
         address: address.toString(),
         txId: '1d732950d99f821b8a8d11972ea56000b0666e4d31fa71861ffd80a83797dc61',

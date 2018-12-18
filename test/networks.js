@@ -15,9 +15,9 @@ describe('Networks', function() {
     network.should.equal(Networks.livenet);
     network.should.equal(Networks.mainnet);
     network.should.equal(Networks.defaultNetwork);
-    var network = Networks.get('REGTEST');
+    var network = Networks.get('LTCREG');
     network.should.equal(Networks.regtest);
-    var network = Networks.get('TESTNET');
+    var network = Networks.get('LTCTEST');
     network.should.equal(Networks.testnet);
   });
 
@@ -44,15 +44,15 @@ describe('Networks', function() {
   constants.forEach(function(key) {
     it('should have constant ' + key + ' for all networks', function() {
       lodash.has(Networks.get('LTC'), key).should.equal(true);
-      lodash.has(Networks.get('REGTEST'), key).should.equal(true);
-      lodash.has(Networks.get('TESTNET'), key).should.equal(true);
+      lodash.has(Networks.get('LTCREG'), key).should.equal(true);
+      lodash.has(Networks.get('LTCTEST'), key).should.equal(true);
     });
   });
 
   it('tests only for the specified key', function() {
     expect(Networks.get(0x30, 'prefix.pubkeyhash')).to.equal(Networks.get('LTC'));
     // Testnet and Regtest have the same pubkeyhash value.
-    expect(Networks.get(0x6f, 'prefix.pubkeyhash').alias).to.equal(Networks.get('TESTNET').alias);
+    expect(Networks.get(0x6f, 'prefix.pubkeyhash').alias).to.equal(Networks.get('LTCTEST').alias);
     expect(Networks.get(0x6f, 'prefix.pubkeyhash').alias).to.equal(Networks.testnet.alias);
     expect(Networks.get(0xa0, 'prefix.privatekey')).to.equal(undefined);
   });
@@ -60,8 +60,8 @@ describe('Networks', function() {
   it('can test for multiple keys', function() {
     expect(Networks.get(0x32, ['prefix.pubkeyhash', 'prefix.scripthash'])).to.equal(Networks.get('LTC'));
     // Testnet and Regtest have the same pubkeyhash value.
-    expect(Networks.get(0x6f, ['prefix.pubkeyhash', 'prefix.scripthash']).alias).to.equal(Networks.get('TESTNET').alias);
-    expect(Networks.get(0x3a, ['prefix.pubkeyhash', 'prefix.scripthash']).alias).to.equal(Networks.get('TESTNET').alias);
+    expect(Networks.get(0x6f, ['prefix.pubkeyhash', 'prefix.scripthash']).alias).to.equal(Networks.get('LTCTEST').alias);
+    expect(Networks.get(0x3a, ['prefix.pubkeyhash', 'prefix.scripthash']).alias).to.equal(Networks.get('LTCTEST').alias);
     expect(Networks.get(0xa0, ['prefix.privatekey', 'port'])).to.equal(undefined);
   });
 

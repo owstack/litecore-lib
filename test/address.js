@@ -54,7 +54,7 @@ describe('Address', function() {
           var type = addressTypes[d[0].slice(0, 1)];
           var network = 'LTC';
           if (d[2].chain.includes('test')) {
-            network = 'TESTNET';
+            network = 'LTCTEST';
           }
           return new Address(d[0], network, type);
         });
@@ -122,7 +122,7 @@ describe('Address', function() {
   describe('validation', function() {
 
     it('getValidationError detects network mismatchs 2', function() {
-      var error = Address.getValidationError('MDPj1iqqCy23rLccUFvgC8HZq41fB8EH4y', 'TESTNET');
+      var error = Address.getValidationError('MDPj1iqqCy23rLccUFvgC8HZq41fB8EH4y', 'LTCTEST');
       should.exist(error);
     });
 
@@ -132,7 +132,7 @@ describe('Address', function() {
     });
 
     it('isValid returns false on network mismatch 2', function() {
-      var valid = Address.isValid('MDPj1iqqCy23rLccUFvgC8HZq41fB8EH4y', 'TESTNET');
+      var valid = Address.isValid('MDPj1iqqCy23rLccUFvgC8HZq41fB8EH4y', 'LTCTEST');
       valid.should.equal(false);
     });
 
@@ -152,14 +152,14 @@ describe('Address', function() {
 
     it('validates correctly the P2SH testnet test vector', function() {
       for (var i = 0; i < P2SHTestnet.length; i++) {
-        var error = Address.getValidationError(P2SHTestnet[i], 'TESTNET');
+        var error = Address.getValidationError(P2SHTestnet[i], 'LTCTEST');
         should.not.exist(error);
       }
     });
 
     it('rejects correctly the P2PKH livenet test vector with "testnet" parameter', function() {
       for (var i = 0; i < PKHLivenet.length; i++) {
-        var error = Address.getValidationError(PKHLivenet[i], 'TESTNET');
+        var error = Address.getValidationError(PKHLivenet[i], 'LTCTEST');
         should.exist(error);
       }
     });
@@ -182,7 +182,7 @@ describe('Address', function() {
     it('should not validate on a network mismatch', function() {
       var error, i;
       for (i = 0; i < PKHLivenet.length; i++) {
-        error = Address.getValidationError(PKHLivenet[i], 'TESTNET', 'pubkeyhash');
+        error = Address.getValidationError(PKHLivenet[i], 'LTCTEST', 'pubkeyhash');
         should.exist(error);
         error.message.should.equal('Address has mismatched network type.');
       }
@@ -211,7 +211,7 @@ describe('Address', function() {
 
     it('testnet addresses are validated correctly', function() {
       for (var i = 0; i < PKHTestnet.length; i++) {
-        var error = Address.getValidationError(PKHTestnet[i], 'TESTNET');
+        var error = Address.getValidationError(PKHTestnet[i], 'LTCTEST');
         should.not.exist(error);
       }
     });
@@ -312,7 +312,7 @@ describe('Address', function() {
       var a = Address.fromPublicKeyHash(hash, 'LTC');
       a.network.should.equal(Networks.livenet);
       a.toString().should.equal(str);
-      var b = Address.fromPublicKeyHash(hash, 'TESTNET');
+      var b = Address.fromPublicKeyHash(hash, 'LTCTEST');
       b.network.should.equal(Networks.testnet);
       b.type.should.equal('pubkeyhash');
       new Address(hash, 'LTC').toString().should.equal(str);
@@ -432,7 +432,7 @@ describe('Address', function() {
     });
 
     it('should derive from this known address string testnet', function() {
-      var a = new Address(PKHTestnet[0], 'TESTNET');
+      var a = new Address(PKHTestnet[0], 'LTCTEST');
       var b = new Address(a.toString());
       b.toString().should.equal(PKHTestnet[0]);
       b.network.should.equal(Networks.testnet);
@@ -445,7 +445,7 @@ describe('Address', function() {
     });
 
     it('should derive from this known address string testnet scripthash', function() {
-      var address = new Address(P2SHTestnet[0], 'TESTNET', 'scripthash');
+      var address = new Address(P2SHTestnet[0], 'LTCTEST', 'scripthash');
       address = new Address(address.toString());
       address.toString().should.equal(P2SHTestnet[0]);
     });
@@ -574,7 +574,7 @@ describe('Address', function() {
 
     it('fails if invalid array is provided', function() {
       expect(function() {
-        return Address.createMultisig([], 3, 'TESTNET');
+        return Address.createMultisig([], 3, 'LTCTEST');
       }).to.throw('Number of required signatures must be less than or equal to the number of public keys');
     });
   });
