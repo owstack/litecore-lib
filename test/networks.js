@@ -30,9 +30,9 @@ describe('Networks', function() {
   });
 
   var constants = [
-    'name',
-    'code',
-    'coin',
+    'currency',
+    'description',
+    'coinIndex',
     'protocol',
     'prefix.pubkeyhash',
     'prefix.privatekey',
@@ -70,8 +70,8 @@ describe('Networks', function() {
   });
 
   it('network object should be immutable', function() {
-    expect(Networks.get('LTC').code).to.equal('LTC')
-    var fn = function() { Networks.get('LTC').code = 'Something else' }
+    expect(Networks.get('LTC').name).to.equal('LTC')
+    var fn = function() { Networks.get('LTC').name = 'Something else' }
     expect(fn).to.throw(TypeError)
   });
 
