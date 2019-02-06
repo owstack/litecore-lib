@@ -1,6 +1,6 @@
 {
   "name": "@owstack/ltc-lib",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "description": "A Javascript library to build litecoin and blockchain-based applications.",
   "main": "index.js",
   "scripts": {
