@@ -160,7 +160,7 @@ describe('Unit', function() {
 
   it('inspect method displays nicely', function() {
     var unit = new Unit(1.3, 'LTC');
-    unit.inspect().should.equal('<Unit: 130000000 litoshis>');
+    unit.inspect().should.equal('<Unit: 130000000 lits>');
   });
 
   it('fails when the unit is not recognized', function() {
