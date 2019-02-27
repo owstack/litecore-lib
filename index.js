@@ -21,4 +21,10 @@ ltcLib.Unit = require('./lib/unit');
 // Internal usage, exposed for testing/advanced tweaking
 ltcLib.Transaction.sighash = require('./lib/transaction/sighash');
 
+// Inject this library into each of its networks as network.lib.
+var ltcNetworks = require('@owstack/network-lib').getFiltered({currency: ltcLib.Networks.currency});
+for (var i = 0; i < ltcNetworks.length; i++) {
+	ltcNetworks[i].lib = ltcLib;
+}
+
 module.exports = ltcLib;
