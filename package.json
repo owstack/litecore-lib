@@ -48,7 +48,7 @@
     "brfs": "^1.2.0",
     "chai": "^1.10.0",
     "gulp": "^3.8.10",
-    "npm install": "^1.1.6",
+    "natives": "^1.1.6",
     "sinon": "^1.13.0"
   },
   "license": "MIT"
