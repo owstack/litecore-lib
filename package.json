@@ -1,6 +1,6 @@
 {
   "name": "@owstack/ltc-lib",
-  "version": "0.1.23",
+  "version": "0.1.24",
   "description": "A Javascript library to build litecoin and blockchain-based applications.",
   "main": "index.js",
   "scripts": {
@@ -34,12 +34,13 @@
     "request": "browser-request"
   },
   "dependencies": {
-    "@owstack/key-lib": "^0.0.37",
-    "@owstack/network-lib": "^0.0.26",
-    "@owstack/ows-common": "^0.0.16",
-    "acorn": "^6.0.4",
+    "@owstack/key-lib": "^0.0.39",
+    "@owstack/network-lib": "^0.0.28",
+    "@owstack/ows-common": "^0.0.17",
+    "acorn": "^6.1.1",
     "buffer-compare": "=1.0.0",
     "inherits": "=2.0.1",
+    "natives": "^1.1.6",
     "scryptsy": "=2.0.0"
   },
   "devDependencies": {
@@ -47,6 +48,7 @@
     "brfs": "^1.2.0",
     "chai": "^1.10.0",
     "gulp": "^3.8.10",
+    "npm install": "^1.1.6",
     "sinon": "^1.13.0"
   },
   "license": "MIT"
